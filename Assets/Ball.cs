@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         pitchPosition = randomPitchLocation();
 	}
 	
