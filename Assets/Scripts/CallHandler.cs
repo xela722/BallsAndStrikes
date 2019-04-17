@@ -26,6 +26,7 @@ public class CallHandler : MonoBehaviour {
         {
             eventHandler.eventWalk();
             updateBalls(0);
+            updateStrikes(0);
             //New batter
             //Decide whether or not to keep track of base runners.
         }
@@ -39,6 +40,7 @@ public class CallHandler : MonoBehaviour {
         {
             eventHandler.eventStrikeOut();
             updateStrikes(0);
+            updateBalls(0);
             updateOuts(outs + 1);
             if(outs == 3)
             {

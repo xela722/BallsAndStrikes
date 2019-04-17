@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour {
 
         pitchStartPos = transform.position;
         pitchPosition = pitchStartPos;
+        newPitch();
 	}
 	
     public void newPitch()
