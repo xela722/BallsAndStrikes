@@ -12,6 +12,8 @@ public class CallHandler : MonoBehaviour {
     public Text outText;
     public Text inningText;
 
+    public EventTextHandler eventHandler;
+
     public int balls, strikes, outs = 0;
     public int inning = 1;
 
@@ -19,6 +21,14 @@ public class CallHandler : MonoBehaviour {
     {
         theBall.newPitch();
         updateBalls(balls + 1);
+
+        if(balls == 4)
+        {
+            eventHandler.eventWalk();
+            updateBalls(0);
+            //New batter
+            //Decide whether or not to keep track of base runners.
+        }
     }
     public void callStrike()
     {
@@ -27,6 +37,7 @@ public class CallHandler : MonoBehaviour {
 
         if (strikes == 3)
         {
+            eventHandler.eventStrikeOut();
             updateStrikes(0);
             updateOuts(outs + 1);
             if(outs == 3)
