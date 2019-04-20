@@ -28,8 +28,8 @@ public class Ball : MonoBehaviour {
     Vector3 randomPitchLocation()
     {
         return new Vector3(
-            Random.Range(StrikeZone.bounds.min.x, StrikeZone.bounds.max.x),
-            Random.Range(StrikeZone.bounds.min.y, StrikeZone.bounds.max.y)
+            Random.Range(StrikeZone.bounds.min.x-(3*this.GetComponent<SpriteRenderer>().bounds.size.x), StrikeZone.bounds.max.x+(3*this.GetComponent<SpriteRenderer>().bounds.size.x)),
+            Random.Range(StrikeZone.bounds.min.y-(3*this.GetComponent<SpriteRenderer>().bounds.size.y), StrikeZone.bounds.max.y+(3*this.GetComponent<SpriteRenderer>().bounds.size.y))
             );
     }
 
