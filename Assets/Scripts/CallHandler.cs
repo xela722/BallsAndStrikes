@@ -17,10 +17,23 @@ public class CallHandler : MonoBehaviour {
     public int balls, strikes, outs = 0;
     public int inning = 1;
 
+    public int totalCalls = 0;
+    public int correctCalls = 0;
+    
     public void callBall()
     {
-        theBall.newPitch();
+        totalCalls += 1;
         updateBalls(balls + 1);
+
+        if (!theBall.isStrike())
+        {
+            Debug.Log("Correct - Ball");
+            correctCalls += 1;
+        }
+        else
+        {
+            Debug.Log("Incorrect - Strike");
+        }
 
         if(balls == 4)
         {
@@ -30,11 +43,24 @@ public class CallHandler : MonoBehaviour {
             //New batter
             //Decide whether or not to keep track of base runners.
         }
+
+        theBall.waitingCall = false;
+        theBall.newPitch();
     }
     public void callStrike()
     {
-        theBall.newPitch();
+        totalCalls += 1;
         updateStrikes(strikes + 1);
+
+        if (theBall.isStrike())
+        {
+            Debug.Log("Correct - Strike");
+            correctCalls += 1;
+        }
+        else
+        {
+            Debug.Log("Incorrect - Ball");
+        }
 
         if (strikes == 3)
         {
@@ -42,11 +68,15 @@ public class CallHandler : MonoBehaviour {
             updateStrikes(0);
             updateBalls(0);
             updateOuts(outs + 1);
+            //new batter
             if(outs == 3)
             {
                 nextInning();
             }
         }
+
+        theBall.waitingCall = false;
+        theBall.newPitch();
     }
 
     void updateBalls(int ballCount)
