@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CallHandler : MonoBehaviour {
 
@@ -20,6 +21,12 @@ public class CallHandler : MonoBehaviour {
     public int totalCalls = 0;
     public int correctCalls = 0;
     
+    public void Start()
+    {
+        PlayerPrefs.SetInt("correctCalls",0);
+        PlayerPrefs.SetInt("totalCalls",0);
+    }
+
     public void callBall()
     {
         totalCalls += 1;
@@ -102,10 +109,25 @@ public class CallHandler : MonoBehaviour {
 
     public void nextInning()
     {
-        updateInning(inning + 1);
+        if(inning!=3)
+        {
+            updateInning(inning + 1);
 
-        updateBalls(0);
-        updateStrikes(0);
-        updateOuts(0);
+            updateBalls(0);
+            updateStrikes(0);
+            updateOuts(0);
+        }
+        else
+        {
+            endGame();
+        }
     }
+
+    public void endGame()
+    {
+        PlayerPrefs.SetInt("correctCalls", correctCalls);
+        PlayerPrefs.SetInt("totalCalls", totalCalls);
+        SceneManager.LoadScene(2);
+    }
+
 }
